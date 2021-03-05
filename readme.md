@@ -48,6 +48,15 @@ scripts = {
 }
 ```
 
+### 配置静态页面title
+
+```javascript
+// src/modules/module/config.json
+{
+    "title": "默认title"
+}
+```
+
 ### base配置
 
 ```javascript
