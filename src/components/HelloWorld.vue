@@ -6,8 +6,6 @@
     <a href="https://v3.vuejs.org/" target="_blank">Vue 3 Documentation</a>
   </p>
 
-  wtf
-
   <button @click="state.count++">count is: {{ state.count }}</button>
   <p>
     Edit
@@ -15,7 +13,7 @@
   </p>
 </template>
 
-<script setup lang="ts">
+<script setup>
   import { defineProps, reactive } from 'vue'
 
   defineProps({

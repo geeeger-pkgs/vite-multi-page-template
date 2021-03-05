@@ -3,19 +3,42 @@
   "version": "0.0.0",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "cross-env NODE_ENV=production vite build",
     "serve": "vite preview",
-    "create": "node ./scripts/cli/createModule.js"
+    "create": "node --trace-warnings ./scripts/cli/createModule.js"
   },
   "dependencies": {
-    "vue": "^3.0.7"
+    "@vueuse/core": "^4.3.1",
+    "vue": "^3.0.7",
+    "vue-router": "^4.0.4",
+    "vuex": "^4.0.0"
   },
   "devDependencies": {
+    "@rollup/plugin-strip": "^2.0.0",
+    "@typescript-eslint/eslint-plugin": "^4.16.1",
+    "@typescript-eslint/parser": "^4.16.1",
+    "@vitejs/plugin-legacy": "^1.3.1",
     "@vitejs/plugin-vue": "^1.1.5",
     "@vue/compiler-sfc": "^3.0.7",
+    "autoprefixer": "^10.2.4",
+    "cross-env": "^7.0.3",
     "ejs": "^3.1.6",
+    "eslint": "^7.21.0",
+    "eslint-config-prettier": "^8.1.0",
+    "eslint-plugin-prettier": "^3.3.1",
+    "eslint-plugin-vue": "^7.7.0",
     "fs-extra": "^9.1.0",
+    "less": "^4.1.1",
+    "postcss": "^8.2.7",
+    "prettier": "^2.2.1",
     "prompts": "^2.4.0",
+    "typescript": "^4.2.3",
+    "sass": "^1.32.8",
     "vite": "^2.0.4"
-  }
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 11"
+  ]
 }

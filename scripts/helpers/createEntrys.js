@@ -1,7 +1,8 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 const fs = require('fs')
 const path = require('path')
 const { normalizePath } = require('vite')
-const { render } = require("ejs")
+const { render } = require('ejs')
 
 const { resolve } = path
 
@@ -20,29 +21,29 @@ const { resolve } = path
  *  virtualEntrys: {
  *      [key: string]: string
  *  }
- * }}  
+ * }}
  */
 module.exports = function createEntry(config) {
-    const pages = fs.readdirSync(resolve(config.cwd, config.modulesPath))
-    const input = {}
-    const virtualEntrys = {}
-    const entryHTML = fs.readFileSync(resolve(config.cwd, config.templatePath), {
-      encoding: 'utf-8'
+  const pages = fs.readdirSync(resolve(config.cwd, config.modulesPath))
+  const input = {}
+  const virtualEntrys = {}
+  const entryHTML = fs.readFileSync(resolve(config.cwd, config.templatePath), {
+    encoding: 'utf-8'
+  })
+  for (let index = 0; index < pages.length; index++) {
+    const element = pages[index]
+    // 由于vite内部全部处理成posix路径了
+    // 入口路径处理为posix路径
+    input[element] = normalizePath(resolve(config.cwd, `${element}.html`))
+    const moduleConfig = require(resolve(config.cwd, config.modulesPath, element, 'config.json'))
+    const html = render(entryHTML, {
+      title: moduleConfig.title,
+      injectScript: `<script type="module" src="/${config.entrysPath}/${element}.ts"></script>`
     })
-    for (let index = 0; index < pages.length; index++) {
-      const element = pages[index]
-      // 由于vite内部全部处理成posix路径了
-      // 入口路径处理为posix路径
-      input[element] = normalizePath(resolve(config.cwd, `${element}.html`))
-      const moduleConfig = require(resolve(config.cwd, config.modulesPath, element,'config.json'))
-      const html = render(entryHTML, {
-        title: moduleConfig.title,
-        injectScript: `<script type="module" src="/${config.entrysPath}/${element}.js"></script>`,
-      })
-      virtualEntrys[input[element]] = html
-    }
-    return {
-      input,
-      virtualEntrys,
-    }
+    virtualEntrys[input[element]] = html
+  }
+  return {
+    input,
+    virtualEntrys
+  }
 }

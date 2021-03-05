@@ -1,0 +1,33 @@
+html,
+body,
+div,
+ul,
+li,
+a,
+span,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+ul,
+ol {
+  list-style-type: none;
+}
+
+a:hover,
+a:focus {
+  outline: none;
+}
+
+[safe-area-inset-bottom] {
+  padding-bottom: constant(safe-area-inset-bottom);
+  padding-bottom: env(safe-area-inset-bottom);
+}

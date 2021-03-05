@@ -1,8 +1,13 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 const vue = require('@vitejs/plugin-vue')
 const ViteFakeEntrysPlugin = require('./scripts/plugins/ViteFakeEntrysPlugin')
 const ViteConfigureServerPlugin = require('./scripts/plugins/ViteConfigureServerPlugin')
+const legacy = require('@vitejs/plugin-legacy')
+const strip = require('@rollup/plugin-strip')
 const createEntrys = require('./scripts/helpers/createEntrys')
 const pathConfig = require('./scripts/config')
+const path = require('path')
+const { defineConfig } = require('vite')
 
 const cwd = process.cwd()
 
@@ -13,39 +18,39 @@ const config = createEntrys({
   ...pathConfig
 })
 
-
 /**
  * https://vitejs.dev/config/
  * @type {import('vite').UserConfig}
  */
-export default {
+export default defineConfig({
   base,
   plugins: [
+    // 虚拟html入口
     ViteFakeEntrysPlugin(config.virtualEntrys),
     vue(),
+    // 虚拟html入口服务配置
     ViteConfigureServerPlugin({
       base,
       cwd,
       virtualEntrys: config.virtualEntrys
+    }),
+    legacy(),
+    // 清除debugger及console
+    strip({
+      functions: ['console.log']
     })
-    // {
-    //   name: 'test',
-    //   transformIndexHtml: {
-    //     enforce: 'pre',
-    //     transform(html, ctx) {
-    //       if (ctx.server && ctx.filename in entryConfig.virtualConfig) {
-
-    //         return entryConfig.virtualConfig[ctx.filename]
-    //       }
-    //       return html
-    //     }
-    //   }
-    // },
-    
   ],
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, '/src')
+    }
+  },
+  server: {
+    open: true
+  },
   build: {
     rollupOptions: {
       input: config.input
     }
   }
-}
+})
