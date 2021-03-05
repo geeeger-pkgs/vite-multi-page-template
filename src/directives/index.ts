@@ -1,4 +1,4 @@
-import MyDirective, { name as MyDirectiveName } from "./custom";
+import MyDirective, { name as MyDirectiveName } from './custom'
 
 const config: {
   [key: string]: any
