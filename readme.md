@@ -1,6 +1,9 @@
 # vite-multi-page模板
 
-注意，index.html不会自动fallback,访问子页面需直接输入html路径
+<del>注意，index.html不会自动fallback,访问子页面需直接输入html路径</del>
+
++ 2021年7月20日 增加了server.open配置，支持打开指定首页
++ 反馈，未知原因dev 第一次启动以后白页，刷一下就好了
 
 ### 依赖
 

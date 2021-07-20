@@ -17,6 +17,7 @@ const config = createEntrys({
   cwd: cwd,
   ...pathConfig
 })
+process.env.BROWSER = 'chrome'
 
 /**
  * https://vitejs.dev/config/
@@ -46,7 +47,7 @@ export default defineConfig({
     }
   },
   server: {
-    open: true
+    open: base + 'index.html'
   },
   build: {
     rollupOptions: {

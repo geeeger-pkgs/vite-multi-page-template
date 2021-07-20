@@ -35,7 +35,9 @@ module.exports = function createEntry(config) {
     // 由于vite内部全部处理成posix路径了
     // 入口路径处理为posix路径
     input[element] = normalizePath(resolve(config.cwd, `${element}.html`))
-    const moduleConfig = require(resolve(config.cwd, config.modulesPath, element, 'config.json'))
+    const moduleConfig = JSON.parse(
+      fs.readFileSync(resolve(config.cwd, config.modulesPath, element, 'config.json'))
+    )
     const html = render(entryHTML, {
       title: moduleConfig.title,
       injectScript: `<script type="module" src="/${config.entrysPath}/${element}.ts"></script>`
