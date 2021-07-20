@@ -7,6 +7,8 @@ function getURLPath(url) {
   return url ? url.split('?')[0] : url
 }
 
+let reload = false
+
 /**
  * @description 配置开发服务
  * @export
@@ -33,6 +35,10 @@ module.exports = function ViteConfigureServerPlugin(config = {}) {
               )
             ]
           if (html) {
+            if (reload === false) {
+              reload = true
+              res.setHeader('refresh', `1;url=${url}`)
+            }
             send(req, res, html, 'html', '')
           } else {
             next()
