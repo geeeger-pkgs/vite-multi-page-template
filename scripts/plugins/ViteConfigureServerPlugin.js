@@ -3,6 +3,10 @@ const { normalizePath, send } = require('vite')
 const { resolve } = require('path')
 const name = 'vite-configureServer-plugin'
 
+function getURLPath(url) {
+  return url ? url.split('?')[0] : url
+}
+
 /**
  * @description 配置开发服务
  * @export
@@ -17,13 +21,14 @@ module.exports = function ViteConfigureServerPlugin(config = {}) {
     name,
     configureServer(server) {
       server.middlewares.use((req, res, next) => {
-        if (req.url && req.url.endsWith('.html')) {
+        const url = getURLPath(req.url)
+        if (url && url.endsWith('.html')) {
           const html =
             config.virtualEntrys[
               normalizePath(
                 resolve(
                   config.cwd,
-                  req.url.replace(new RegExp('^' + config.base), '').replace(/^\//, '')
+                  url.replace(new RegExp('^' + config.base), '').replace(/^\//, '')
                 )
               )
             ]
