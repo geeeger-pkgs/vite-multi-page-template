@@ -8,10 +8,10 @@
 ### 依赖
 
 ```
-"@vueuse/core": "^4.3.1",
-vue: "^3.0.7",
-"vue-router": "^4.0.4",
-vuex: "^4.0.0"
+"@vueuse/core": "^4.11.2",
+"vue": "^3.1.5",
+"vue-router": "^4.0.10",
+"vuex": "^4.0.2"
 ```
 
 ### 支持
@@ -40,10 +40,10 @@ vuex: "^4.0.0"
 ```javascript
 scripts = {
     // 启动开发项目
-    dev: "vite",
+    dev: "vite --mode dev",
     // 构建
-    buildprod: "cross-env NODE_ENV=production vite build",
-    buildtest: "cross-env NODE_ENV=development vite build",
+    buildprod: "vite build --mode prod",
+    buildtest: "vite build --mode test",
     // 预览
     serve: "vite preview",
     // 创建新页面
@@ -66,7 +66,7 @@ scripts = {
 // ./scripts/config.js
 module.exports = {
   // 路径配置
-  // 如果配置为/app
+  // 如果配置为/app/
   // 访问localhost:3000/app/index.html
   base: '/',
   templatePath: 'scripts/template/index.html',

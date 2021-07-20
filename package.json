@@ -2,8 +2,9 @@
   "name": "vite-multi-page-template",
   "version": "0.0.0",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build --mode prod",
+    "dev": "vite --mode dev",
+    "buildprod": "vite build --mode prod",
+    "buildtest": "vite build --mode test",
     "serve": "vite preview",
     "create": "node --trace-warnings ./scripts/cli/createModule.js"
   },
